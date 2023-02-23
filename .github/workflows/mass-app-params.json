@@ -1,0 +1,24 @@
+{
+  "application": {
+    "health_check_path": "/health",
+    "logs": {
+      "disk_quota_mb": 50,
+      "retention_period_days": 7
+    },
+    "maximum_worker_count": 3,
+    "minimum_worker_count": 1,
+    "sku_name": "P1v3",
+    "zone_balancing": false
+  },
+  "dns": {
+    "enable_dns": false
+  },
+  "docker": {
+    "image": "bloby",
+    "registry": "massdrivercloud",
+    "tag": "IMAGE_TAG"
+  },
+  "monitoring": {
+    "mode": "AUTOMATED"
+  }
+}
