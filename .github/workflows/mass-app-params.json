@@ -14,7 +14,7 @@
     "enable_dns": false
   },
   "image": {
-    "repository": "massdrivercloud/bloby",
+    "repository": "massdriverwest.azurecr.io/test/repo",
     "tag": "IMAGE_TAG"
   },
   "monitoring": {
