@@ -21,7 +21,7 @@ jobs:
         run: mass image push test/repo -a ${{ secrets.AUTHENTICATION_ARTIFACT_ID_AZURE }} -r westus -t ${{ steps.vars.outputs.sha_short }}
       # Deploy
       - name: Update Tag
-        run: cat mass-app-params.json | sed s/IMAGE_TAG/${{ steps.vars.outputs.sha_short }}/ > .github/workflows/mass-app-params-rendered.json
+        run: cat .github/workflows/mass-app-params.json | sed s/IMAGE_TAG/${{ steps.vars.outputs.sha_short }}/ > .github/workflows/mass-app-params-rendered.json
       - name: debug_1
         run: echo "$(cat .github/workflows/mass-app-params-rendered.json)" >> $GITHUB_OUTPUT
       - name: Configure Package
