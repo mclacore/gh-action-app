@@ -21,9 +21,9 @@ jobs:
         run: mass image push test/repo -a ${{ secrets.AUTHENTICATION_ARTIFACT_ID_AZURE }} -r westus -t ${{ steps.vars.outputs.sha_short }}
       # Deploy
       - name: Update Tag
-        run: cat mass-app-params.json | sed s/IMAGE_TAG/${{ steps.vars.outputs.sha_short }}/ > mass-app-params-rendered.json
+        run: cat mass-app-params.json | sed s/IMAGE_TAG/${{ steps.vars.outputs.sha_short }}/ > .github/workflows/mass-app-params-rendered.json
       - name: Configure Package
-        run: mass package configure michael-test-ghaction-dgdw -f mass-app-params-rendered.json
+        run: mass package configure michael-test-ghaction-dgdw -f .github/workflows/mass-app-params-rendered.json
       # this requires a massdriver.yaml file, we might not want that
       - name: Deploy
         run: mass app deploy michael-test-ghaction-dgdw
