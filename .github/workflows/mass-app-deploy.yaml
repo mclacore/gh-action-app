@@ -23,7 +23,7 @@ jobs:
       - name: Update Tag
         run: cat mass-app-params.json | sed s/IMAGE_TAG/${{ steps.vars.outputs.sha_short }}/ > .github/workflows/mass-app-params-rendered.json
       - name: debug_1
-        run: cat .github/workflows/mass-app-params-rendered.json
+        run: echo "$(cat .github/workflows/mass-app-params-rendered.json)"
       - name: Configure Package
         run: mass package configure michael-test-ghaction-dgdw -f .github/workflows/mass-app-params-rendered.json
       # this requires a massdriver.yaml file, we might not want that
