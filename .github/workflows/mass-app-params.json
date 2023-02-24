@@ -13,9 +13,8 @@
   "dns": {
     "enable_dns": false
   },
-  "docker": {
-    "image": "bloby",
-    "registry": "massdrivercloud",
+  "image": {
+    "repository": "massdrivercloud/bloby",
     "tag": "IMAGE_TAG"
   },
   "monitoring": {
