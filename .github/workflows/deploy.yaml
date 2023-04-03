@@ -33,7 +33,7 @@ jobs:
           target: test
           manifest: ghaction
           set: |
-            .runtime.image.tag = "${{ github.sha }}"
+            .image.tag = "${{ github.sha }}"
       - name: Deploy App
         uses: massdriver-cloud/actions/app_deploy@v3
         with:
