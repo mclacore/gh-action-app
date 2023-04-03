@@ -21,11 +21,8 @@ jobs:
           artifact: ${{ secrets.AUTHENTICATION_ARTIFACT_ID }}
           region: ${{ vars.REGION }}
           image-tag: ${{ github.sha }}
-          build-context: ./
       - name: Publish Bundle 
         uses: massdriver-cloud/actions/bundle_publish@v3
-        with:
-          build-directory: "./"
       - name: Set Image Version
         uses: massdriver-cloud/actions/app_patch@v3
         with:
