@@ -1,0 +1,42 @@
+name: Deploy to Massdriver
+on:
+  push:
+    branches: [main]
+
+jobs:
+  push_and_deploy:
+    runs-on: ubuntu-latest
+    env:
+      MASSDRIVER_ORG_ID: ${{ secrets.MASSDRIVER_ORG_ID }}
+      MASSDRIVER_API_KEY: ${{ secrets.MASSDRIVER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Massdriver CLI
+        uses: massdriver-cloud/actions@v3
+      - name: Push Image
+        uses: massdriver-cloud/actions/image_push@v3
+        with:
+          namespace: ${{ vars.NAMESPACE }}
+          image-name: ${{ vars.IMAGE_NAME }}
+          artifact: ${{ secrets.AUTHENTICATION_ARTIFACT_ID }}
+          region: ${{ vars.REGION }}
+          image-tag: ${{ github.sha }}
+          build-context: ./
+      - name: Publish Bundle 
+        uses: massdriver-cloud/actions/bundle_publish@v3
+        with:
+          build-directory: "./src"
+      - name: Set Image Version
+        uses: massdriver-cloud/actions/app_patch@v3
+        with:
+          project: dev
+          target: test
+          manifest: ghaction
+          set: |
+            .runtime.image.tag = "${{ github.sha }}"
+      - name: Deploy App
+        uses: massdriver-cloud/actions/app_deploy@v3
+        with:
+          project: dev
+          target: test
+          manifest: ghaction
